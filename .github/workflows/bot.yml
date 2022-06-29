@@ -1,7 +1,7 @@
 name: Testing Bot
 on: pull_request
 jobs:
-  Bot:
+  Initiate:
     name: Testing Bot
     runs-on: ubuntu-latest
     steps:
@@ -21,3 +21,37 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           path: results/results.txt
+  Status:
+    name: Status Bot
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for test to succeed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-test
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: build
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Do something with a passing build
+        if: steps.wait-for-build.outputs.conclusion == 'success'
+        run: echo "You have passed all of the tests" > output/test_results.txt
+        
+
+      - name: Do something with a failing build
+        if: steps.wait-for-build.outputs.conclusion == 'failure'
+        run: echo "You have failed a test" > output/test_results.txt
+        
+      - uses: actions/upload-artifact@v1
+        with:
+          name: test_results
+          path: output
+      - uses: actions/download-artifact@v1
+        with:
+          name: test_results
+      - name: comment PR
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: test_results/test_results.txt
