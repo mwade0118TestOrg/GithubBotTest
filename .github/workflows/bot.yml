@@ -1,4 +1,4 @@
-name: Bot
+name: Testing Bot
 on: pull_request
 jobs:
   Bot:
