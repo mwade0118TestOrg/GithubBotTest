@@ -57,7 +57,7 @@ jobs:
         id: wait-for-test
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          running-workflow-name: 'Run Tests'
+          check-name: 'Run Tests (3.7)'
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Do something with a passing build
