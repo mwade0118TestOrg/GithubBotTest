@@ -59,6 +59,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: 'Run Tests (3.7)'
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          
+      - name: Set up Output
+      - uses: actions/checkout@v1
+      - run: mkdir -p output/
+      
 
       - name: Do something with a passing build
         if: steps.wait-for-build.outputs.conclusion == 'success'
@@ -69,7 +74,8 @@ jobs:
         if: steps.wait-for-build.outputs.conclusion == 'failure'
         run: echo "You have failed a test" > output/test_results.txt
         
-      - uses: actions/upload-artifact@v1
+      - name: Post Results
+        uses: actions/upload-artifact@v1
         with:
           name: test_results
           path: output
