@@ -70,13 +70,13 @@ jobs:
 
       - name: Do something with a failing build
         if: steps.wait-for-build.outputs.conclusion == 'failure'
-        run: mkdir -p output1/ && echo "You have failed a test" > output/test_results.txt
+        run: mkdir -p output1/ && echo "You have failed a test" > output1/test_results.txt
         
       - name: Post Results
         uses: actions/upload-artifact@v1
         with:
           name: test_results
-          path: output
+          path: output1
       - uses: actions/download-artifact@v1
         with:
           name: test_results
