@@ -60,19 +60,17 @@ jobs:
           checkName: 'Run Tests (3.7)'
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           
-      - name: Set up Output
-      - uses: actions/checkout@v1
-      - run: mkdir -p output/
-      
-
+      - name: Setup
+        uses: actions/checkout@v1
+        
       - name: Do something with a passing build
         if: steps.wait-for-build.outputs.conclusion == 'success'
-        run: echo "You have passed all of the tests" > output/test_results.txt
+        run: mkdir -p output1/ && echo "You have passed all of the tests" > output1/test_results.txt
         
 
       - name: Do something with a failing build
         if: steps.wait-for-build.outputs.conclusion == 'failure'
-        run: echo "You have failed a test" > output/test_results.txt
+        run: mkdir -p output1/ && echo "You have failed a test" > output/test_results.txt
         
       - name: Post Results
         uses: actions/upload-artifact@v1
