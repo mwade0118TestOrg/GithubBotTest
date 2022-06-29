@@ -64,12 +64,12 @@ jobs:
         uses: actions/checkout@v1
         
       - name: Do something with a passing build
-        if: steps.wait-for-build.outputs.conclusion == 'success'
+        if: steps.wait-for-test.outputs.conclusion == 'success'
         run: mkdir -p output1/ && echo "You have passed all of the tests" > output1/test_results.txt
         
 
       - name: Do something with a failing build
-        if: steps.wait-for-build.outputs.conclusion == 'failure'
+        if: steps.wait-for-test.outputs.conclusion == 'failure'
         run: mkdir -p output1/ && echo "You have failed a test" > output1/test_results.txt
         
       - name: Post Results
