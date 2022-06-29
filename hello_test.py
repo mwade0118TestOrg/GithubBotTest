@@ -10,4 +10,4 @@ def test_times_two():
 
 def test_zero():
     val = hello.zero(999)
-    assert val == 0
+    assert val == 5
