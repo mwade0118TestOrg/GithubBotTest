@@ -10,4 +10,4 @@ def zero(number_in):
 if __name__ == '__main__':
     print(f'100 plus one is {addOne(100)}')
     print(f'12 times 2 is {timesTwo(12)}')
-    print(f'Anything times 0 is {zero(999)}')
+    print(f'Anything times 0 is {zero(1200)}')
