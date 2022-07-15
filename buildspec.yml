@@ -19,4 +19,3 @@ reports:
       - pytest_report.xml
     base-directory: pytest_reports/
     file-format: JUNITXML
-    export: s3
