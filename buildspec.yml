@@ -12,7 +12,7 @@ phases:
       - python -m pytest --junitxml=pytest_reports/pytest_report.xml
   post_build:
     commands:
-      - aws s3 sync pytest_reports/pytest_report.xml s3://poc-test-results-bucket --delete
+      - aws s3 sync . s3://poc-test-results-bucket --delete
 
 
 reports:
