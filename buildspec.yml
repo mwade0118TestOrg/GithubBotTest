@@ -10,6 +10,10 @@ phases:
   build:
     commands:
       - python -m pytest --junitxml=pytest_reports/pytest_report.xml
+  artifacts:
+  files:
+    - '**/*'
+  name: $(AWS_REGION)-$(date +%Y-%m-%d) 
 
 reports:
   pytest_reports:
