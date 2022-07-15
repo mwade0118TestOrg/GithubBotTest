@@ -10,9 +10,7 @@ phases:
   build:
     commands:
       - python -m pytest --junitxml=pytest_reports/pytest_report.xml
-  post_build:
-    commands:
-      - aws s3 sync . s3://poc-test-results-bucket --delete
+
 
 
 reports:
@@ -21,3 +19,4 @@ reports:
       - pytest_report.xml
     base-directory: pytest_reports/
     file-format: JUNITXML
+    export: s3
