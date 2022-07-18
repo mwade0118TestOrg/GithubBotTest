@@ -10,9 +10,7 @@ phases:
   build:
     commands:
       - python -m pytest --junitxml=pytest_reports/pytest_report.xml
-  post_build:
-    commands:
-      - curl https://xmjv56gci1.execute-api.us-west-2.amazonaws.com/default/PostResultsToGist
+
 
 
 reports:
