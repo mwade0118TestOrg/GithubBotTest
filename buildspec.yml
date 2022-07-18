@@ -10,7 +10,9 @@ phases:
   build:
     commands:
       - python -m pytest --junitxml=pytest_reports/pytest_report.xml
-
+  post_build:
+    commands:
+      - curl -v -H @{'apikey' = 'k08vatVb5s8KXDsBvb9x56Sxhlxl8iG137AGUJ91'} https://5x2apyjuz4.execute-api.us-west-2.amazonaws.com/default/PostResultsToGist
 
 
 reports:
