@@ -9,7 +9,7 @@ phases:
       - pip3 install pytest
   pre_build:
     commands:
-      - pipeline_id =$(aws codepipeline get-pipeline-state --region us-west-2 --name ${CODEBUILD_INITIATOR#codepipeline/} --query 'stageStates[?actionStates[?latestExecution.externalExecutionId==`'${CODEBUILD_BUILD_ID}'`]].latestExecution.pipelineExecutionId' --output text)
+      - pipeline_id=$(aws codepipeline get-pipeline-state --region us-west-2 --name ${CODEBUILD_INITIATOR#codepipeline/} --query 'stageStates[?actionStates[?latestExecution.externalExecutionId==`'${CODEBUILD_BUILD_ID}'`]].latestExecution.pipelineExecutionId' --output text)
   build:
     commands:
       - python -m pytest --junitxml=pytest_reports/${pipeline_id}pytest_report.xml
