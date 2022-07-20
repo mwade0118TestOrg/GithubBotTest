@@ -19,6 +19,6 @@ phases:
 reports:
   pytest_reports:
     files:
-      - pytest_report.xml
+      - ${pipeline_id}pytest_report.xml
     base-directory: pytest_reports/
     file-format: JUNITXML
