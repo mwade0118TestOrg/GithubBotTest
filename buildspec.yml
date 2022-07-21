@@ -9,9 +9,7 @@ phases:
       - pip3 install pytest
   pre_build:
     commands:
-      - pipeline_id=$(aws codepipeline get-pipeline-state --region us-west-2 --name ${CODEBUILD_INITIATOR#codepipeline/} \ 
-        --query 'stageStates[?actionStates[?latestExecution.externalExecutionId==`'${CODEBUILD_BUILD_ID}'`]].latestExecution.pipelineExecutionId' \
-        --output text)
+      - pipeline_id=$(aws codepipeline get-pipeline-state --region us-west-2 --name ${CODEBUILD_INITIATOR#codepipeline/} --query 'stageStates[?actionStates[?latestExecution.externalExecutionId==`'${CODEBUILD_BUILD_ID}'`]].latestExecution.pipelineExecutionId' --output text)
       - pr_number=$(aws ssm get-parameter --name ${pipeline_id}pr_number | jq -r '.Parameter.Value')
   build:
     commands:
