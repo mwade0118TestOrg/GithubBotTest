@@ -11,16 +11,15 @@ phases:
     commands:
       - pipeline_id=$(aws codepipeline get-pipeline-state --region us-west-2 --name ${CODEBUILD_INITIATOR#codepipeline/} --query 'stageStates[?actionStates[?latestExecution.externalExecutionId==`'${CODEBUILD_BUILD_ID}'`]].latestExecution.pipelineExecutionId' --output text)
       - pr_number=$(aws ssm get-parameter --name ${pipeline_id}pr_number | jq -r '.Parameter.Value')
-      - echo ${pr_number}
   build:
     commands:
-      - python -m pytest --junitxml=pytest_reports/${pipeline_id}pytest_report.xml
+      - python -m pytest --junitxml=pytest_reports/pytest_report${pr_number}.xml
 
 
 
 reports:
   pytest_reports:
     files:
-      - ${pipeline_id}pytest_report.xml
+      - pytest_report${pr_number}.xml
     base-directory: pytest_reports/
     file-format: JUNITXML
