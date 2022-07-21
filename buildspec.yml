@@ -13,13 +13,13 @@ phases:
       - pr_number=$(aws ssm get-parameter --name ${pipeline_id}pr_number | jq -r '.Parameter.Value')
   build:
     commands:
-      - python -m pytest --junitxml=pytest_reports/pytest_report${pr_number}.xml
+      - python -m pytest --junitxml=pytest_reports/pytest_report_${pr_number}.xml
 
 
 
 reports:
   pytest_reports:
     files:
-      - pytest_report${pr_number}.xml
+      - pytest_report_${pr_number}.xml
     base-directory: pytest_reports/
     file-format: JUNITXML
