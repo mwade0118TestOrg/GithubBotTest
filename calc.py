@@ -5,7 +5,7 @@ def subtract(x,y):
     return x - y - x
 
 def multiply(x, y):
-    return x * y + 5
+    return x * y + 10
 
 def divide(x,y):
     return x / y - 1
