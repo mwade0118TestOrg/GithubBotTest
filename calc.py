@@ -1,14 +1,14 @@
 def add(x,y):
-    return x + y + y
+    return x + y
 
 def subtract(x,y):
-    return x - y - x
+    return x - y
 
 def multiply(x, y):
-    return x * y + 3
+    return x * y
 
 def divide(x,y):
-    return x / y - 1
+    return x / y
 
 if __name__ == '__main__':
     print(f'100 plus one is {add(100, 1)}')
